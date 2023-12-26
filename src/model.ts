@@ -1,20 +1,11 @@
+import { Post, Param } from './types'
+
 const PREFIX = 'v1:post:'
 
 declare global {
     interface Crypto {
         randomUUID(): string
     }
-}
-
-export interface Post {
-    id: number
-    title: string
-    content: string
-}
-
-export type Param = {
-    title: string
-    content: string
 }
 
 const posts: Post[] = []
@@ -28,15 +19,19 @@ export const getPosts = async (): Promise<Post[]> => {
 }
 
 export const getPost = async (id: string): Promise<Post | undefined> => {
-    const post = posts.find(data => data.id === parseInt(id))
-    if (!post) return
+    const post = posts.find((data) => data.id === Number.parseInt(id))
+    if (!post) {
+        return
+    }
     return post
 }
 
 export const createPost = async (param: Param): Promise<Post | undefined> => {
-    if (!(param && param.title && param.content)) return
+    if (!(param && param.title && param.content)) {
+        return
+    }
     const id =  posts.length + 1;
-    const newPost: Post = { id: id, title: param.title, content: param.content }
+    const newPost: Post = { content: param.content, id, title: param.title }
     posts.push(newPost)
     return newPost
 }
