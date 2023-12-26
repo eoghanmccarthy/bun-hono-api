@@ -1,5 +1,6 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
+import { bearerAuth } from 'hono/bearer-auth'
 
 import * as model from './model'
 
@@ -23,7 +24,7 @@ api.get('/posts/:id', async (c) => {
     return c.json({ post: post, ok: true })
 })
 
-api.post('/posts', async (c) => {
+api.post('/posts', bearerAuth({ token: process.env.BEARER_TOKEN || '' }), async (c) => {
     const param = await c.req.parseBody() as model.Param;
     const newPost = await model.createPost(param as model.Param)
     if (!newPost) {
