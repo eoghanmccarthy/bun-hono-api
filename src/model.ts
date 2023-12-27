@@ -1,18 +1,6 @@
 import { Post, Param } from './types'
 
-const PREFIX = 'v1:post:'
-
-declare global {
-    interface Crypto {
-        randomUUID(): string
-    }
-}
-
 const posts: Post[] = []
-
-const generateID = (key: string) => {
-    return `${PREFIX}${key}`
-}
 
 export const getPosts = async (): Promise<Post[]> => {
     return posts
