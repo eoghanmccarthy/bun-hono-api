@@ -1,4 +1,4 @@
-This is a web API backend developed with Bun and Hono.
+This is a web API backend built with Hono.
 ```
 bun install
 bun run dev
