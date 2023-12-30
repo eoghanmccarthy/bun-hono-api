@@ -7,7 +7,7 @@ import api from './api'
 
 const app = new Hono()
 
-app.get('/', (c) => c.text('My API'))
+app.get('/', (c) => c.text('My Hono API'))
 app.notFound((c) => c.json({ message: 'Not Found', ok: false }, 404))
 
 const middleware = new Hono()
