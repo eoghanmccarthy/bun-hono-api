@@ -8,7 +8,9 @@ import { createPost, getPost, getPosts } from './model'
 const api = new Hono()
 
 api.use('/posts/*', cors({
-    origin: 'http://localhost:3000'
+    origin: (origin) => {
+        return origin.startsWith('http://localhost:') ? origin : null
+    }
 }))
 
 api.get('/posts', async (c) => {
